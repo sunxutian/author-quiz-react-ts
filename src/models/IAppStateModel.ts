@@ -1,5 +1,5 @@
-import { IAuthorModel } from './IAuthorModel';
+import ITurnDataModel from './ITurnDataModel';
 
 export default interface IAppStateModel {
-    turnData: IAuthorModel;
+    next: () => ITurnDataModel
 }
