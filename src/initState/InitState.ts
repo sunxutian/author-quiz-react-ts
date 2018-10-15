@@ -70,7 +70,7 @@ export function getTurnData(): ITurnDataModel {
     return {
       author,
       books: fourRandomBooks.map(b => ({
-        isCorrectAnswer: getAuthorFromBookName(b).name === author.name,
+        bookAuthor: getAuthorFromBookName(b).name,
         title: b,
       })),
     };

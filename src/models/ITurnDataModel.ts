@@ -6,6 +6,6 @@ export default interface ITurnDataModel {
 }
 
 export interface IBookSelection {
+    bookAuthor: string;
     title: string;
-    isCorrectAnswer: boolean;
 }

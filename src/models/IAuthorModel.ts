@@ -1,4 +1,5 @@
-export interface IAuthorModel{
+
+export interface IAuthorModel {
     authorImageURL: any;
     books: ReadonlyArray<string>;
     name: string;

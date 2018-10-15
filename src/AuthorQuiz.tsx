@@ -23,7 +23,9 @@ class AuthorQuiz extends React.Component<IAppStateModel, { turnData: ITurnDataMo
       <Grid fluid={true}>
         <Hero />
         <Turn {...this.state.turnData} />
-        <Continue next={this.continueAfterSelect}/>
+        <Continue next={this.continueAfterSelect}>
+          Continue
+        </Continue>
         <Footer />
       </Grid>
     )
