@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Col, Image, Row } from 'react-bootstrap';
 import Book from '../components/Book';
-import ITurnDataModel, { IBookSelection } from '../models/ITurnDataModel';
+import { IBookSelection, ITurnDataModel } from '../types';
 
 export class Turn extends React.Component<ITurnDataModel, { answered: boolean, answeredCorrectly: boolean }>{
     constructor(props: ITurnDataModel, state: { answered: boolean }) {
@@ -29,7 +29,7 @@ export class Turn extends React.Component<ITurnDataModel, { answered: boolean, a
                 </Col>
                 <Col md={6} sm={6}>
                     {this.props.books.map(({ title, bookAuthor }: IBookSelection, index: number) =>
-                        <Book title={title} key={index.toString()} answered = {this.state.answered}
+                        <Book title={title} key={index.toString()} answered={this.state.answered} index={index}
                             isCorrectAnswer={this.state.answered ? bookAuthor === this.props.author.name : null}
                             onClicked={this.onAnswerClick(bookAuthor)}
                         />)}

@@ -1,10 +1,17 @@
 import * as React from 'react';
 
-const Book = ({ title, isCorrectAnswer, onClicked, answered }:
-    { title: string, isCorrectAnswer: boolean | null, onClicked: () => void, answered: boolean }) => (
-        <h4 onClick={onClicked} id={`book_${title}`}
+interface IProps {
+    title: string;
+    isCorrectAnswer: boolean | null;
+    answered: boolean;
+    index: number;
+    onClicked: () => void;   
+}
+
+const Book = ({ title, isCorrectAnswer, onClicked, answered, index }: IProps) => (
+        <h4 onClick={onClicked} id={`book_${index}`}
             className={isCorrectAnswer === null ? "answer" : (isCorrectAnswer ? "answer text-success" : "answer text-danger")}
-            style={{cursor: answered ? "not-allowed" : "pointer"}}>
+            style={{ cursor: answered ? "not-allowed" : "pointer" }}>
             {title}
         </h4>
     );

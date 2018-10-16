@@ -5,36 +5,24 @@ import { Continue } from './components/Continue';
 import { Footer } from './components/Footer';
 import { Hero } from './components/Hero';
 import { Turn } from './components/Turn';
-import IAppStateModel from './models/IAppStateModel';
-import ITurnDataModel from './models/ITurnDataModel';
+import {IAppState} from './types';
 
-class AuthorQuiz extends React.Component<IAppStateModel, { turnData: ITurnDataModel }>{
-  constructor(props: IAppStateModel, state: { turnData: ITurnDataModel }) {
-    super(props, state);
-
-    this.state = {
-      turnData: this.props.next()
-    };
-    this.continueAfterSelect = this.continueAfterSelect.bind(this);
+class AuthorQuiz extends React.Component<IAppState>{
+  constructor(props: IAppState) {
+    super(props);
   }
 
   public render() {
     return (
       <Grid fluid={true}>
         <Hero />
-        <Turn {...this.state.turnData} />
-        <Continue next={this.continueAfterSelect}>
+        <Turn {...this.props.turnData} />
+        <Continue next={this.props.next}>
           Continue
         </Continue>
         <Footer />
       </Grid>
     )
-  }
-
-  private continueAfterSelect = () => {
-    this.setState({
-      turnData: this.props.next()
-    });
   }
 }
 

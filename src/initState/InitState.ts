@@ -1,6 +1,5 @@
 import { sample, shuffle } from 'lodash';
-import { IAuthorModel } from 'src/models/IAuthorModel';
-import ITurnDataModel from 'src/models/ITurnDataModel';
+import { IAuthorModel, ITurnDataModel } from 'src/types';
 import charlesdickens from '../images/authors/charlesdickens.jpg';
 import jkrowling from '../images/authors/jkrowling.jpg';
 import josephconrad from '../images/authors/josephconrad.png';
@@ -9,7 +8,7 @@ import stephenhawking from '../images/authors/stephenhawking.jpg';
 import willamshakespeare from '../images/authors/willamshakespeare.jpg';
 
 
-export const authors: ReadonlyArray<IAuthorModel> = [
+const authors: ReadonlyArray<IAuthorModel> = [
   {
     authorImageURL: marktwain,
     books: ['The Adventures of Huckleberry Finn'],
@@ -71,10 +70,15 @@ export function getTurnData(): ITurnDataModel {
       author,
       books: fourRandomBooks.map(b => ({
         bookAuthor: getAuthorFromBookName(b).name,
-        title: b,
+        isCorrectAnswer: false,
+        title: b
       })),
+      isCorrect: false,
+      isSelected: false,
     };
   }
 
   throw new Error();
 }
+
+export const defaultState = getTurnData();
