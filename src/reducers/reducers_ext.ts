@@ -1,25 +1,26 @@
 import { combineReducers } from 'redux';
-import { defaultState } from 'src/initState/InitState';
-import { IAppState, IBookSelection, ITurnDataModel } from 'src/types';
-import { ActionType, getType, StateType } from 'typesafe-actions';
+import { getTurnData } from 'src/initState/InitState';
+import { IAppState, IBookSelection, ITurnProps } from 'src/types';
+import { ActionType, getType } from 'typesafe-actions';
 import * as actions from '../actions';
 
 export type AppActions = ActionType<typeof actions>;
-
-const turnReducer = (state: ITurnDataModel = defaultState, action: AppActions): ITurnDataModel => {
-    switch (action.type) {
-        case getType(actions.selectBook):
-            const books = state.books.map<IBookSelection>(b => ({ ...b, isCorrectAnswer: b.bookAuthor === state.author.name }));
-            return { ...state, books, isCorrect: action.payload === state.author.name, isSelected: true };
-        default:
-            return state;
-    }
-};
+const defaultState = getTurnData();
 
 const defaultAppState: IAppState = {
     next: () => defaultState,
     turnData: defaultState
 }
+
+const turnReducer = (state: ITurnProps = defaultState, action: AppActions): ITurnProps => {
+    switch (action.type) {
+        case getType(actions.selectBook):
+            const bookSelections = state.bookSelections.map<IBookSelection>(b => ({ ...b, isCorrectAnswer: b.bookAuthor === state.author.name }));
+            return { ...state, bookSelections, isCorrect: action.payload === state.author.name, isSelected: true };
+        default:
+            return state;
+    }
+};
 
 export const appReducer = (state: IAppState = defaultAppState, action: AppActions): IAppState => {
     switch (action.type) {
@@ -33,8 +34,6 @@ export const appReducer = (state: IAppState = defaultAppState, action: AppAction
 };
 
 export const combinedAppReducer = combineReducers<IAppState, AppActions>({
-    next: (state, action) => state as () => ITurnDataModel,
-    turnData: (state, action) => turnReducer(state, action)
+    next: (state = () => defaultState, action) => state as () => ITurnProps,
+    turnData: (state = defaultState, action) => turnReducer(state, action)
 })
-
-export type rootState = StateType<typeof combinedAppReducer>

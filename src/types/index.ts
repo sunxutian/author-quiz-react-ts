@@ -6,9 +6,9 @@ export interface IAuthorModel {
     readonly imageAttribution?: string;
 }
 
-export interface ITurnDataModel {
+export interface ITurnProps {
     readonly author: IAuthorModel,
-    readonly books: ReadonlyArray<IBookSelection>,
+    readonly bookSelections: ReadonlyArray<IBookSelection>,
     readonly isSelected: boolean,
     readonly isCorrect: boolean,
 }
@@ -20,6 +20,6 @@ export interface IBookSelection {
 }
 
 export interface IAppState {
-    readonly turnData: ITurnDataModel;
-    readonly next: () => ITurnDataModel;
+    readonly turnData: ITurnProps;
+    readonly next: () => ITurnProps;
 }

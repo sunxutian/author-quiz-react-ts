@@ -1,5 +1,5 @@
 import { sample, shuffle } from 'lodash';
-import { IAuthorModel, ITurnDataModel } from 'src/types';
+import { IAuthorModel, ITurnProps } from 'src/types';
 import charlesdickens from '../images/authors/charlesdickens.jpg';
 import jkrowling from '../images/authors/jkrowling.jpg';
 import josephconrad from '../images/authors/josephconrad.png';
@@ -61,14 +61,14 @@ const getAuthorFromBookName = (title: string | undefined) => {
   throw new Error("author not matches");
 }
 
-export function getTurnData(): ITurnDataModel {
+export function getTurnData(): ITurnProps {
   const fourRandomBooks = shuffle(allBooks).slice(0, 4);
   const answer = sample(fourRandomBooks);
   const author = getAuthorFromBookName(answer);
   if (author) {
     return {
       author,
-      books: fourRandomBooks.map(b => ({
+      bookSelections: fourRandomBooks.map(b => ({
         bookAuthor: getAuthorFromBookName(b).name,
         isCorrectAnswer: false,
         title: b
@@ -80,5 +80,3 @@ export function getTurnData(): ITurnDataModel {
 
   throw new Error();
 }
-
-export const defaultState = getTurnData();

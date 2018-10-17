@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Subtract } from 'utility-types'
-import Book from './Book';
 
 interface IGenericListProps<T> {
     items: T[];

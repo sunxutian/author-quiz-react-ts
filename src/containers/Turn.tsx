@@ -1,12 +1,26 @@
+import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import {selectBookAction, continueNextAction} from '../actions';
-import { Turn } from '../components/Turn';
+import { Turn } from 'src/components/Turn';
+import { selectBook } from '../actions';
+import { AppActions } from '../reducers/reducers_ext';
 import { IAppState } from '../types';
 
-export function mapStateToProps({ turnData }: IAppState) {
+function mapStateToProps({ turnData }: IAppState) {
     return turnData;
 }
 
-export function mapDispatchToProps(dispatch: Dispatch<>){
-    
-}
+// function mapDispatchToProps(dispatch: Dispatch<AppActions>) {
+//     return bindActionCreators({
+//         onBookSelection: (author: string) => () => selectBook(author)
+//     }, dispatch)
+// };
+
+function mapDispatchToPropsExt(dispatch: Dispatch<AppActions>) {
+    return {
+        onBookSelection: (author: string) => () => dispatch(selectBook(author))
+    }
+};
+
+
+
+export const ConnectedTurn = connect(mapStateToProps, mapDispatchToPropsExt)(Turn);
