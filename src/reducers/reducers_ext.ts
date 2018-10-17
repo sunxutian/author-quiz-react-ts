@@ -1,39 +1,53 @@
 import { combineReducers } from 'redux';
-import { getTurnData } from 'src/initState/InitState';
 import { IAppState, IBookSelection, ITurnProps } from 'src/types';
 import { ActionType, getType } from 'typesafe-actions';
 import * as actions from '../actions';
+import { initState } from '../initState/InitState';
 
 export type AppActions = ActionType<typeof actions>;
-const defaultState = getTurnData();
 
-const defaultAppState: IAppState = {
-    next: () => defaultState,
-    turnData: defaultState
-}
-
-const turnReducer = (state: ITurnProps = defaultState, action: AppActions): ITurnProps => {
+const turnReducer = (state: ITurnProps, action: AppActions): ITurnProps => {
     switch (action.type) {
         case getType(actions.selectBook):
             const bookSelections = state.bookSelections.map<IBookSelection>(b => ({ ...b, isCorrectAnswer: b.bookAuthor === state.author.name }));
             return { ...state, bookSelections, isCorrect: action.payload === state.author.name, isSelected: true };
+        case getType(actions.continueNext):
+            return { ...state, ...action.payload };
         default:
             return state;
     }
 };
 
-export const appReducer = (state: IAppState = defaultAppState, action: AppActions): IAppState => {
-    switch (action.type) {
-        case getType(actions.selectBook):
-            return { ...state, turnData: turnReducer(state.turnData, action) };
-        case getType(actions.continueNext):
-            return { ...state, turnData: state.next() };
-        default:
-            return state;
-    }
-};
 
 export const combinedAppReducer = combineReducers<IAppState, AppActions>({
-    next: (state = () => defaultState, action) => state as () => ITurnProps,
-    turnData: (state = defaultState, action) => turnReducer(state, action)
+    fetchError: (state, action) => {
+        switch (action.type) {
+            case getType(actions.fetchNextTurn.failure):
+                return action.payload;
+            default:
+                return null;
+        }
+    },
+    fetchPercentage: (state = 0, action) => {
+        switch (action.type) {
+            case getType(actions.fetchPercentageReport):
+                return action.payload;
+            case getType(actions.continueNext):
+                return 0;
+            default:
+                return state;
+        }
+    },
+    isFetching: (state = false, action) => {
+        switch (action.type) {
+            case getType(actions.fetchNextTurn.request):
+                return true;
+            case getType(actions.fetchNextTurn.success):
+            case getType(actions.fetchNextTurn.failure):
+                return false;
+            default:
+                return state;
+        }
+    },
+    turnData: (state = initState, action) => turnReducer(state, action)
 })

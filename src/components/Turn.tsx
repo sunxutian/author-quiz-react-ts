@@ -15,7 +15,7 @@ export const Turn = ({ isSelected, isCorrect, author, onBookSelection, bookSelec
             {bookSelections.map(({ title, bookAuthor }: IBookSelection, index: number) =>
                 <Book title={title} key={index.toString()} answered={isSelected} index={index}
                     isCorrectAnswer={isSelected ? bookAuthor === author.name : null}
-                    onBookSelected={onBookSelection(author.name)}
+                    onBookSelected={onBookSelection(bookAuthor)}
                 />)}
         </Col>
     </Row>

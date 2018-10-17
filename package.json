@@ -8,12 +8,14 @@
     "npm": "^6.4.1",
     "react": "^16.5.2",
     "react-bootstrap": "^0.32.4",
+    "react-circle": "^1.1.1",
     "react-dom": "^16.5.2",
     "react-redux": "^5.0.7",
     "react-scripts-ts": "3.1.0",
     "redux": "^4.0.1",
     "redux-actions": "^2.6.1",
-    "redux-observable": "^1.0.0"
+    "redux-observable": "^1.0.0",
+    "rxjs": "^6.3.3"
   },
   "scripts": {
     "start": "react-scripts-ts start",

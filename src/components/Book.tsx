@@ -8,7 +8,7 @@ interface IProps {
     onBookSelected: () => void;   
 }
 
-const Book = ({ title, isCorrectAnswer, onBookSelected, answered, index }: IProps) => (
+const Book : React.SFC<IProps> = ({ title, isCorrectAnswer, onBookSelected, answered, index }) => (
         <h4 onClick={onBookSelected} id={`book_${index}`}
             className={isCorrectAnswer === null ? "answer" : (isCorrectAnswer ? "answer text-success" : "answer text-danger")}
             style={{ cursor: answered ? "not-allowed" : "pointer" }}>

@@ -21,5 +21,7 @@ export interface IBookSelection {
 
 export interface IAppState {
     readonly turnData: ITurnProps;
-    readonly next: () => ITurnProps;
+    readonly isFetching: boolean;
+    readonly fetchError?: Error | null;
+    readonly fetchPercentage: number;
 }

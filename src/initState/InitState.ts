@@ -1,5 +1,4 @@
-import { sample, shuffle } from 'lodash';
-import { IAuthorModel, ITurnProps } from 'src/types';
+import { IAuthorModel, IBookSelection, ITurnProps } from 'src/types';
 import charlesdickens from '../images/authors/charlesdickens.jpg';
 import jkrowling from '../images/authors/jkrowling.jpg';
 import josephconrad from '../images/authors/josephconrad.png';
@@ -7,8 +6,7 @@ import marktwain from '../images/authors/marktwain.jpg';
 import stephenhawking from '../images/authors/stephenhawking.jpg';
 import willamshakespeare from '../images/authors/willamshakespeare.jpg';
 
-
-const authors: ReadonlyArray<IAuthorModel> = [
+export const authors: ReadonlyArray<IAuthorModel> = [
   {
     authorImageURL: marktwain,
     books: ['The Adventures of Huckleberry Finn'],
@@ -49,34 +47,13 @@ const authors: ReadonlyArray<IAuthorModel> = [
   }
 ];
 
-const allBooks: ReadonlyArray<string> = authors.map(a => a.books).reduce((p, c) => {
-  return p.concat(c);
-}, []);
-
-const getAuthorFromBookName = (title: string | undefined) => {
-  const author = authors.find((a) => a.books.some(b => b === title));
-  if (author) {
-    return author;
-  }
-  throw new Error("author not matches");
-}
-
-export function getTurnData(): ITurnProps {
-  const fourRandomBooks = shuffle(allBooks).slice(0, 4);
-  const answer = sample(fourRandomBooks);
-  const author = getAuthorFromBookName(answer);
-  if (author) {
-    return {
-      author,
-      bookSelections: fourRandomBooks.map(b => ({
-        bookAuthor: getAuthorFromBookName(b).name,
-        isCorrectAnswer: false,
-        title: b
-      })),
-      isCorrect: false,
-      isSelected: false,
-    };
-  }
-
-  throw new Error();
-}
+export const initState: ITurnProps = {
+  author: authors[0],
+  bookSelections: authors[0].books.map<IBookSelection>(b => ({
+    bookAuthor: authors[0].name,
+    isCorrectAnswer: true,
+    title: b
+  })),
+  isCorrect: false,
+  isSelected: false
+};
