@@ -20,12 +20,12 @@ const turnReducer = (state: ITurnProps, action: AppActions): ITurnProps => {
 
 
 export const combinedAppReducer = combineReducers<IAppState, AppActions>({
-    fetchError: (state, action) => {
+    fetchError: (state = null, action) => {
         switch (action.type) {
             case getType(actions.fetchNextTurn.failure):
                 return action.payload;
             default:
-                return null;
+                return state;
         }
     },
     fetchPercentage: (state = 0, action) => {

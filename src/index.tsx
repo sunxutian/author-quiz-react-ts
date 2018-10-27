@@ -5,7 +5,7 @@ import * as ReactDOM from 'react-dom';
 import './App.css';
 
 import { Provider } from 'react-redux';
-import { ConnectedAuthorQuiz } from './containers/AuthorQuiz';
+import ConnectedAuthorQuiz from './containers/AuthorQuiz';
 import registerServiceWorker from './registerServiceWorker';
 import store from './store';
 

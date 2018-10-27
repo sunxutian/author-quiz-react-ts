@@ -17,4 +17,4 @@ const mapDispatchToProps = (dispatch: Dispatch<AppActions>) =>
     }, dispatch);
 
 
-export const ConnectedAuthorQuiz = connect(mapStateToProps, mapDispatchToProps)(AuthorQuiz);
+export default connect(mapStateToProps, mapDispatchToProps)(AuthorQuiz);

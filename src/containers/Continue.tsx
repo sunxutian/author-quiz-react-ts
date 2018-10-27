@@ -11,4 +11,4 @@ const mapDispatchToProps = (dispatch: Dispatch<AppActions>) => bindActionCreator
     fetchNext: fetchNextTurn.request
 }, dispatch);
 
-export const ConnectedContinue = connect(mapStateToProps, mapDispatchToProps)(Continue);
+export default connect(mapStateToProps, mapDispatchToProps)(Continue);

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Jumbotron } from 'react-bootstrap';
 
-export const Hero = () => (
+export default () => (
     <div className="row">
         <Jumbotron className="col-10 offset-1">
             <h1>Author Quiz</h1>

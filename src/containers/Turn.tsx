@@ -23,4 +23,4 @@ function mapDispatchToPropsExt(dispatch: Dispatch<AppActions>) {
 
 
 
-export const ConnectedTurn = connect(mapStateToProps, mapDispatchToPropsExt)(Turn);
+export default connect(mapStateToProps, mapDispatchToPropsExt)(Turn);

@@ -2,7 +2,7 @@ import { configure, mount } from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { ConnectedAuthorQuiz } from 'src/containers/AuthorQuiz';
+import ConnectedAuthorQuiz from 'src/containers/AuthorQuiz';
 // import { AuthorQuiz } from '../AuthorQuiz';
 // import { Turn } from '../components/Turn';
 // import { IAuthorModel, IBookSelection, ITurnProps } from '../types'

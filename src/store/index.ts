@@ -9,13 +9,13 @@ import { LoadCounterService } from 'src/services/loadCountService';
 import { IAppState } from 'src/types';
 
 export const epicMiddleware = createEpicMiddleware<AppActions, AppActions, IAppState, IDependencyServices>({
-  dependencies: {authorService: new LocalAuthorService(), loadingCounterService: new LoadCounterService()}
+  dependencies: { authorService: new LocalAuthorService(), loadingCounterService: new LoadCounterService() }
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 function configureStore(initialState?: IAppState) {
-  return createStore(combinedAppReducer, initialState!, 
+  return createStore(combinedAppReducer, initialState!,
     composeEnhancers(applyMiddleware(epicMiddleware)));
 }
 

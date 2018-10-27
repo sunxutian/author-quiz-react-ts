@@ -2,17 +2,18 @@ import * as React from 'react';
 import { Alert, Col, Grid, Row } from 'react-bootstrap';
 import Circle from 'react-circle';
 import './App.css';
-import { Footer } from './components/Footer';
-import { Hero } from './components/Hero';
-
-import { ConnectedContinue } from './containers/Continue';
-import { ConnectedTurn } from './containers/Turn';
+import asyncComponent from './containers/AsyncContainer';
 
 export interface IAuthorProps {
   error?: Error | null;
   isFeching: boolean;
   loadingProgress: number
 }
+
+const AsyncContinue = asyncComponent(() => import("./containers/Continue"));
+const AsyncTurn = asyncComponent(() => import("./containers/Turn"));
+const AsyncHero = asyncComponent(() => import("./components/Hero"));
+const AsyncFooter = asyncComponent(() => import("./components/Footer"));
 
 export class AuthorQuiz extends React.Component<IAuthorProps & { requestInitData: () => void }>{
 
@@ -22,7 +23,7 @@ export class AuthorQuiz extends React.Component<IAuthorProps & { requestInitData
 
   public render() {
     return <Grid fluid={true}>
-      <Hero />
+      <AsyncHero />
       {this.props.isFeching ?
         <div>
           <Row>
@@ -40,16 +41,16 @@ export class AuthorQuiz extends React.Component<IAuthorProps & { requestInitData
         :
         this.props.error === null || this.props.error === undefined ?
           <div>
-            <ConnectedTurn />
-            <ConnectedContinue>
+            <AsyncTurn />
+            <AsyncContinue>
               Continue
-          </ConnectedContinue>
+            </AsyncContinue>
           </div> :
           <Alert bsStyle="danger">
             <strong>Something wrong happens, Error: {this.props.error.message}</strong>
           </Alert>
       }
-      <Footer />
+      <AsyncFooter />
     </Grid>
   }
 }
