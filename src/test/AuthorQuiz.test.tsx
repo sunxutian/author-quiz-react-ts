@@ -2,6 +2,7 @@ import { configure, mount } from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import { MemoryRouter, Route } from 'react-router';
 import ConnectedAuthorQuiz from 'src/containers/AuthorQuiz';
 // import { AuthorQuiz } from '../AuthorQuiz';
 // import { Turn } from '../components/Turn';
@@ -38,15 +39,21 @@ describe("Author Quiz", () => {
     //     return turnData;
     // }
 
+    const launchAuthorQuiz = () => (
+        <MemoryRouter>
+            <Route component={ConnectedAuthorQuiz}/>
+        </MemoryRouter>
+    )
+
     it("renders without crashing", () => {
         const div = document.createElement("div");
-        ReactDOM.render(<ConnectedAuthorQuiz />, div);
+        ReactDOM.render(launchAuthorQuiz(), div);
     });
 
     describe("When no answer has been selected", () => {
-        let wrapper = mount(<ConnectedAuthorQuiz />);
+        let wrapper = mount(launchAuthorQuiz());
         beforeAll(() => {
-            wrapper = mount(<ConnectedAuthorQuiz />);
+            wrapper = mount(launchAuthorQuiz());
         });
 
         it("should have no background color", () => {

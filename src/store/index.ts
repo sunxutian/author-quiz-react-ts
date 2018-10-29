@@ -12,7 +12,7 @@ export const epicMiddleware = createEpicMiddleware<AppActions, AppActions, IAppS
   dependencies: { authorService: new LocalAuthorService(), loadingCounterService: new LoadCounterService() }
 });
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = compose;
 
 function configureStore(initialState?: IAppState) {
   return createStore(combinedAppReducer, initialState!,

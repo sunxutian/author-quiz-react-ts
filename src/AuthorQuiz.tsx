@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Alert, Col, Grid, Row } from 'react-bootstrap';
 import Circle from 'react-circle';
+import { RouteComponentProps } from 'react-router';
 import './App.css';
 import asyncComponent from './containers/AsyncContainer';
 
@@ -15,7 +16,7 @@ const AsyncTurn = asyncComponent(() => import("./containers/Turn"));
 const AsyncHero = asyncComponent(() => import("./components/Hero"));
 const AsyncFooter = asyncComponent(() => import("./components/Footer"));
 
-export class AuthorQuiz extends React.Component<IAuthorProps & { requestInitData: () => void }>{
+export class AuthorQuiz extends React.Component<IAuthorProps & { requestInitData: () => void } & RouteComponentProps>{
 
   public componentDidMount() {
     this.props.requestInitData();
@@ -41,6 +42,7 @@ export class AuthorQuiz extends React.Component<IAuthorProps & { requestInitData
         :
         this.props.error === null || this.props.error === undefined ?
           <div>
+            <h1>{this.props.location.pathname}</h1>
             <AsyncTurn />
             <AsyncContinue>
               Continue
