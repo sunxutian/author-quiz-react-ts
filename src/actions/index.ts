@@ -12,3 +12,5 @@ export const fetchNextTurn = createAsyncAction(
 )<void, ITurnProps, Error>();
 
 export const fetchPercentageReport = createStandardAction(constants.FETCH_PERCENTAGE_REPORT)<number>();
+
+export const cancelFetchNext = createStandardAction(constants.CANCEL_FETCH)<void>();

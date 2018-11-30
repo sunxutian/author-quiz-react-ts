@@ -14,7 +14,7 @@ export const epicMiddleware = createEpicMiddleware<AppActions, AppActions, IAppS
 
 const composeEnhancers = compose;
 
-function configureStore(initialState?: IAppState) {
+export function configureStore(initialState?: IAppState) {
   return createStore(combinedAppReducer, initialState!,
     composeEnhancers(applyMiddleware(epicMiddleware)));
 }

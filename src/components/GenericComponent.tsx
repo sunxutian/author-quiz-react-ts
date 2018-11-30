@@ -49,16 +49,12 @@ export const withState = <WrappedProps extends IInjectedProps>(
     }
 }
 
-interface IErroInjectedProps {
-    onReset: () => any;
-};
 
+interface IErroInjectedProps { onReset: () => any };
 export const withErrorBoundary = <WrappedProps extends IErroInjectedProps>(
     WrappedComponent: React.ComponentType<WrappedProps>
 ) => {
-    type HocProps = Subtract<WrappedProps, IErroInjectedProps> & {
-
-    };
+    type HocProps = Subtract<WrappedProps, IErroInjectedProps>;
 
     interface IHocState {
         readonly error: Error | null | undefined
@@ -70,7 +66,6 @@ export const withErrorBoundary = <WrappedProps extends IErroInjectedProps>(
         public readonly state = {
             error: undefined
         };
-
         public componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
             this.setState({ ...this.state, error });
             // log error

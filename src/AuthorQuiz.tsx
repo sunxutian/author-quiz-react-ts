@@ -26,7 +26,7 @@ export class AuthorQuiz extends React.Component<IAuthorProps & { requestInitData
     return <Grid fluid={true}>
       <AsyncHero />
       {this.props.isFeching ?
-        <div>
+        <React.Fragment>
           <Row>
             <Col md={6} sm={6} smOffset={4} mdOffset={4}>
               <Circle responsive={false} animate={true} showPercentage={true} progress={this.props.loadingProgress}
@@ -38,16 +38,16 @@ export class AuthorQuiz extends React.Component<IAuthorProps & { requestInitData
                 }} />
             </Col>
           </Row>
-        </div>
+        </React.Fragment>
         :
         this.props.error === null || this.props.error === undefined ?
-          <div>
+          <React.Fragment>
             <h1>{this.props.location.pathname}</h1>
             <AsyncTurn />
             <AsyncContinue>
               Continue
             </AsyncContinue>
-          </div> :
+          </React.Fragment> :
           <Alert bsStyle="danger">
             <strong>Something wrong happens, Error: {this.props.error.message}</strong>
           </Alert>
